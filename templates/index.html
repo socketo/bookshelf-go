@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookshelf</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Bookshelf</h1>
+    <form method="POST" action="/add" class="mb-4">
+        <div class="form-row">
+            <div class="col">
+                <input type="text" name="title" class="form-control" placeholder="タイトル" required>
+            </div>
+            <div class="col">
+                <input type="text" name="author" class="form-control" placeholder="著者" required>
+            </div>
+            <div class="col">
+                <input type="text" name="genre" class="form-control" placeholder="ジャンル" required>
+            </div>
+            <div class="col">
+                <select name="status" class="form-control" required>
+                    <option value="未読">未読</option>
+                    <option value="読んだ">読んだ</option>
+                </select>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">追加</button>
+            </div>
+        </div>
+    </form>
+
+    <h2>Book List</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>タイトル</th>
+                <th>著者</th>
+                <th>ジャンル</th>
+                <th>ステータス</th>
+                <th>アクション</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .books}}
+            <tr>
+                <td>{{.Title}}</td>
+                <td>{{.Author}}</td>
+                <td>{{.Genre}}</td>
+                <td>{{.Status}}</td>
+                <td>
+                    <form method="POST" action="/delete/{{.ID}}" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
